@@ -103,7 +103,7 @@ interface IProps {
   contentConfig: {
     title: string;
     tableItems: any;
-    pageName: string;
+    pageName?: string;
     childrenTree?: any;
     otherInfo?: string;
     fieldName?: string;

@@ -1,4 +1,6 @@
+import router from "@/router";
 import axios from "axios";
+import type { AxiosResponse } from "axios";
 import { ElLoading } from "element-plus";
 
 // @ts-ignore
@@ -66,11 +68,14 @@ class XXRequest {
     );
     //response响应:服务器到客户端
     this.instance.interceptors.response.use(
-      (res) => {
+      (res: AxiosResponse) => {
         // 将loading移除
         this.loading?.close();
         if (res.data.code == 500) {
           ElMessage.error(res.data.msg);
+        }
+        if (res.data.code == 401) {
+          router.push("/login");
         }
         return res.data;
       },
